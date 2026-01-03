@@ -10,7 +10,6 @@ const routes = {
 };
 
 const getRouteFile = function (req, res, next) {
-  console.log(req.path);
   const file = routes[req.path];
 
   if (!file) res.status(404).send("Not found!");

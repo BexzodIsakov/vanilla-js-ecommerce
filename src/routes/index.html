@@ -12,31 +12,52 @@
 <body>
   <header>
     <div class="max-w-[1800px] mx-auto border-b py-2 px-5 flex items-center justify-between" id="cartContainer">
-      <nav>
-        <ul>
-          <li><a href="/about" class="hover:text-blue-300">About</a></li>
-        </ul>
-      </nav>
-      <div class="relative">
+      <div class="flex gap-6 items-center">
+        <label for="filters-siderbar" class="btn btn-ghost btn-circle sm:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </label>
+
+        <nav>
+          <ul>
+            <li><a href="/about" class="hover:text-blue-300">About</a></li>
+          </ul>
+        </nav>
+      </div>
+      <label for="cart-drawer" class="relative cursor-pointer">
         <div id="cartQuantity"
           class="absolute -left-1/2 -top-1 min-w-5 h-5 text-sm rounded-full grid place-items-center bg-black text-white leading-none invisible">
         </div>
         <div class="text-3xl">
           &#128722;
         </div>
-      </div>
+      </label>
     </div>
   </header>
-  <div class="grid grid-cols-[220px_1fr] max-w-[1800px] mx-auto ">
-    <aside class="bg-neutral-50 p-4 sticky top-0 h-screen">
-      <ul id="categories"></ul>
-    </aside>
-    <main>
-      <span class="loading loading-ring loading-md" id="spinner"></span>
-      <ul id="products"
-        class="grid grid-cols-[repeat(auto-fill,minmax(160px,1fr))] items-stretch gap-x-6 gap-y-12 px-5 py-10"></ul>
-    </main>
+
+  <div class="drawer max-w-[1800px] mx-auto sm:drawer-open z-10">
+    <input id="filters-siderbar" type="checkbox" class="drawer-toggle" />
+
+    <div class="drawer-content">
+      <main>
+        <ul id="products"
+          class="grid grid-cols-[repeat(auto-fill,minmax(180px,1fr))] items-stretch gap-x-6 gap-y-12 px-5 py-10">
+          <span class="loading loading-ring loading-md" id="spinner"></span>
+        </ul>
+      </main>
+    </div>
+
+    <div class="drawer-side">
+      <label for="filters-siderbar" aria-label="close sidebar" class="drawer-overlay"></label>
+      <aside class="bg-neutral-50 p-4 sticky top-0 h-screen w-[200px]">
+        <ul id="categories"></ul>
+      </aside>
+    </div>
   </div>
+
+
+
 </body>
 
 </html>
