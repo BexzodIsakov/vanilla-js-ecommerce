@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!-- <html data-theme="dark"> -->
+<html data-theme="wireframe">
+
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="/styles/styles.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="/scripts/script.js"></script>
+</head>
+
+<body>
+  <header>
+    <div class="max-w-[1800px] mx-auto border-b py-2 px-5 flex items-center justify-between" id="cartContainer">
+      <nav>
+        <ul>
+          <li><a href="/about" class="hover:text-blue-300">About</a></li>
+        </ul>
+      </nav>
+      <div class="relative">
+        <div id="cartQuantity"
+          class="absolute -left-1/2 -top-1 min-w-5 h-5 text-sm rounded-full grid place-items-center bg-black text-white leading-none invisible">
+        </div>
+        <div class="text-3xl">
+          &#128722;
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="grid grid-cols-[220px_1fr] max-w-[1800px] mx-auto ">
+    <aside class="bg-neutral-50 p-4 sticky top-0 h-screen">
+      <ul id="categories"></ul>
+    </aside>
+    <main>
+      <span class="loading loading-ring loading-md" id="spinner"></span>
+      <ul id="products"
+        class="grid grid-cols-[repeat(auto-fill,minmax(160px,1fr))] items-stretch gap-x-6 gap-y-12 px-5 py-10"></ul>
+    </main>
+  </div>
+</body>
+
+</html>
