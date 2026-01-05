@@ -1,6 +1,8 @@
 const productsContainer = document.getElementById("products");
 const spinner = document.getElementById("spinner");
 const cartQuantity = document.getElementById("cartQuantity");
+const cartItemsContainer = document.getElementById("cartItems");
+const cartTotal = document.getElementById("cartTotal");
 
 const cartItems = [];
 let products = [];
@@ -96,10 +98,41 @@ function handleAddToCart(itemId) {
   if (inTheCart) return;
 
   const item = products.find((p) => p.id === itemId);
-  cartItems.push(item);
+  cartItems.push({ ...item, quantity: 1 });
 
   updateCartQuantity();
   disableCartBtn(itemId, true);
+  populateCartItems();
+}
+
+function populateCartItems() {
+  renderCartTotalPrice();
+
+  let cartElements = "";
+
+  cartItems.forEach((i) => {
+    cartElements += `
+      <li data-cart-item-id="${i.id}" class="grid grid-cols-[65px,1fr,65px] gap-6 mb-12 text-sm">
+        <image src="${i.image}" alt="${i.title}" class="object-container ratio-square" />
+        <div class="flex flex-col justify-between gap-4">
+          <div>${i.title}</div>
+          <div class="flex gap-1">
+            <button class="btn btn-xs bg-black text-white" onclick="incrementDecrementCartItem('${i.id}', 'decrement')">-</button>
+            <div class="border min-w-[40px] leading-none grid place-items-center" id="cartItemQuantity">${i.quantity}</div>
+            <button class="btn btn-xs bg-black text-white" onclick="incrementDecrementCartItem('${i.id}', 'increment')">+</button>
+          </div>
+        </div>
+        <div class="text-right" id="cartItemPrice">$${i.price}</div>
+      </li>
+    `;
+  });
+
+  cartItemsContainer.innerHTML = cartElements;
+}
+
+function renderCartTotalPrice() {
+  const totalPrice = cartItems.reduce((sum, c) => sum + c.price, 0);
+  cartTotal.textContent = totalPrice.toFixed(2);
 }
 
 function disableCartBtn(id, disabled) {
@@ -132,6 +165,28 @@ function handleCategoryCheck(category, checked) {
   console.log(filters);
 
   updateProductsView();
+}
+
+function incrementDecrementCartItem(itemId, action) {
+  const updatedCartItem = cartItems.find((i) => i.id === itemId);
+  console.log(updatedCartItem);
+  const updatedItemQuantity = updatedCartItem.quantity;
+  const updatedQuantity =
+    action === "increment"
+      ? updatedItemQuantity + 1
+      : Math.max(updateCartQuantity - 1, 0);
+  updatedCartItem.quantity = updatedQuantity;
+  updatedCartItem.price = updatedCartItem.price * updatedQuantity;
+
+  const updatedCartItemEl = document.querySelector(
+    `[data-cart-item-id="${itemId}"]`
+  );
+  const cartItemPriceEl = updatedCartItemEl.querySelector("#cartItemPrice");
+  const cartItemQuantityEl =
+    updatedCartItemEl.querySelector("#cartItemQuantity");
+
+  cartItemPriceEl.textContent = updatedCartItem.price;
+  cartItemQuantityEl.textContent = updatedQuantity;
 }
 
 renderProducts();
