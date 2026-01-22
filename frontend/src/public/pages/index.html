@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+<!-- <html data-theme="wireframe"> -->
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="/styles/styles.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+  <header>
+    <div class="max-w-[1800px] mx-auto border-b py-2 px-5 flex items-center justify-between" id="cartContainer">
+      <div class="flex gap-6 items-center">
+        <label for="filters-siderbar" class="btn btn-ghost btn-circle sm:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </label>
+
+        <nav>
+          <ul class="flex gap-4">
+            <li><a href="/" class="hover:text-blue-300" data-navlink>Home</a></li>
+            <li><a href="/about" class="hover:text-blue-300" data-navlink>About</a></li>
+          </ul>
+        </nav>
+      </div>
+      <label for="cart-drawer" class="relative cursor-pointer">
+        <div id="cartQuantity"
+          class="absolute -left-1/2 -top-1 min-w-5 h-5 text-sm rounded-full grid place-items-center bg-black text-white leading-none invisible">
+        </div>
+        <div class="text-3xl">
+          &#128722;
+        </div>
+      </label>
+    </div>
+  </header>
+  <div id="root"></div>
+  <script src="/utils/router.js"></script>
+</body>
+
+</html>
